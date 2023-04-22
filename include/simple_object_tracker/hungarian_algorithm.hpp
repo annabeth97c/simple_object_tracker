@@ -7,7 +7,7 @@ using namespace std;
 const int INF = 1e9; // A large value to use as an initial value for some variables
 
 // Implementation of the Hungarian algorithm for finding a maximum-weighted perfect matching in a bipartite graph.
-static vector<int> hungarian(vector<vector<int>>& cost) {
+static vector<int> hungarian(vector<vector<double>>& cost) {
     int n = cost.size(), m = cost[0].size(); // n = number of vertices in the left part of the bipartite graph, m = number of vertices in the right part
     vector<int> u(n + 1), v(m + 1), p(m + 1), way(m + 1); // Some auxiliary vectors
     vector<int> match(n + 1, -1); // match[i] is the index of the vertex in the right part of the graph that is matched with vertex i in the left part
