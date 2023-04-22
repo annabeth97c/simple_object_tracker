@@ -10,7 +10,7 @@ Tracker::Tracker(ros::NodeHandle& nh) : nh_(nh) {
 
 void Tracker::spin() {
     ros::Rate r(10);
-    while (ros::ok)
+    while (ros::ok())
     {
         ros::spinOnce();
 
