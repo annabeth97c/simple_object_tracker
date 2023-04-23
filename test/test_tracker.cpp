@@ -177,7 +177,6 @@ TEST_F(TrackerTest, missingObjectTest) {
     ros::NodeHandle nh;
     Tracker tracker(nh);
 
-    // std::cout << "hi! 1" << std::endl;
     // Create some initial tracked objects
     simple_object_tracker::ObjectList object_list_msg;
     simple_object_tracker::Object obj1;
@@ -196,7 +195,6 @@ TEST_F(TrackerTest, missingObjectTest) {
 
     updateObjects(tracker, object_list_msg);
 
-    std::cout << "[test 5] hi! 2" << std::endl;
     // Create a new object list with the first object moved slightly
     simple_object_tracker::ObjectList object_list_msg2;
     simple_object_tracker::Object obj3;
@@ -233,9 +231,6 @@ TEST_F(TrackerTest, missingObjectTest) {
     // // Verify that the first tracked object has been updated with the new position
     ASSERT_EQ(tracked_objects[0].centroid().position.x, 1.2);
     ASSERT_EQ(tracked_objects[0].centroid().position.y, 2.0);
-
-    // std::cout << " obj 0 vel "<< tracked_objects[0].velocity() << std::endl;
-    // ASSERT_EQ(tracked_objects[0].velocity().vector.x, .0);
 
     // // Verify that the second tracked object has not been updated
     ASSERT_EQ(tracked_objects[1].centroid().position.x, 5.0);
