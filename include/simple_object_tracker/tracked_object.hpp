@@ -1,5 +1,3 @@
-using namespace Eigen;
-
 class TrackedObject {
 public:
     TrackedObject() {}
@@ -19,25 +17,25 @@ public:
         // Initialize the Kalman filter
         int state_dim = 6;
         int meas_dim = 3;
-        VectorXd x0(state_dim);
+        Eigen::VectorXd x0(state_dim);
         x0 << centroid_.position.x, centroid_.position.y, centroid_.position.z, velocity_.x, velocity_.y, velocity_.z;
-        MatrixXd P0(state_dim, state_dim);
+        Eigen::MatrixXd P0(state_dim, state_dim);
         P0 << 1, 0, 0, 0, 0, 0,
               0, 1, 0, 0, 0, 0,
               0, 0, 1, 0, 0, 0,
               0, 0, 0, 1, 0, 0,
               0, 0, 0, 0, 1, 0,
               0, 0, 0, 0, 0, 1;
-        MatrixXd Q(state_dim, state_dim);
+        Eigen::MatrixXd Q(state_dim, state_dim);
         Q.setIdentity();
-        MatrixXd R(meas_dim, meas_dim);
+        Eigen::MatrixXd R(meas_dim, meas_dim);
         R.setIdentity();
         ekf_ = ExtendedKalmanFilter(x0, P0, Q, R);
     }
 
     void predict(double dt, ros::Time stamp) {
         // Compute the state transition matrix F
-        MatrixXd F(6, 6);
+        Eigen::MatrixXd F(6, 6);
         F << 1, 0, 0, dt, 0, 0,
              0, 1, 0, 0, dt, 0,
              0, 0, 1, 0, 0, dt,
@@ -46,7 +44,7 @@ public:
              0, 0, 0, 0, 0, 1;
         
         // Compute the control input matrix B
-        MatrixXd B(6, 3);
+        Eigen::MatrixXd B(6, 3);
         B << 0.5 * dt * dt, 0, 0,
              0, 0.5 * dt * dt, 0,
              0, 0, 0.5 * dt * dt,
@@ -55,7 +53,7 @@ public:
              0, 0, dt;
 
         // Compute the control input vector u (assuming constant velocity)
-        VectorXd u(3);
+        Eigen::VectorXd u(3);
         u << 0, 0, 0;
 
         // Predict the state
@@ -76,16 +74,16 @@ public:
 
     }
 
-    void update(const TrackedObject obj) {
+    void update(const TrackedObject& obj) {
         // Compute the measurement matrix H
         // Compute the measurement matrix H
-        MatrixXd H(3, 6);
+        Eigen::MatrixXd H(3, 6);
         H << 1, 0, 0, 0, 0, 0,
              0, 1, 0, 0, 0, 0,
              0, 0, 1, 0, 0, 0;
 
         // Compute the measurement vector z
-        VectorXd z(3);
+        Eigen::VectorXd z(3);
         z << obj.centroid().position.x, obj.centroid().position.y, obj.centroid().position.z;
 
         // Update the state
