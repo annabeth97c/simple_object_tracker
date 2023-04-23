@@ -84,6 +84,7 @@ void Tracker::updateObjects(const simple_object_tracker::ObjectList::ConstPtr& c
     for (size_t i = 0; i < tracked_objects_.size(); i++) {
         if (assignments[i+1] != -1) {
             tracked_objects_[i].update(curr_tracked_objects[assignments[i+1] - 1]);
+            curr_tracked_objects[assignments[i+1] - 1].set_is_assigned(true);
         } else {
             tracked_objects_[i].markMissed();
         }
