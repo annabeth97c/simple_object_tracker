@@ -28,6 +28,7 @@ protected:
     }
 };
 
+// Test that object list callback is able to take in the detected object list and update the tracked objects
 TEST_F(TrackerTest, TestObjectListCallback) {
 
   // Create a fake object list
@@ -39,11 +40,11 @@ TEST_F(TrackerTest, TestObjectListCallback) {
   object.pose.position.z = 0.0;
   object_list.objects.push_back(object);
 
-  // // Create a tracker instance
+  // Create a tracker instance
   ros::NodeHandle nh;
   Tracker tracker(nh);
 
-  // // Call the object list callback
+  // Call the object list callback
   objectListCallback(tracker, object_list);
 
   std::vector<TrackedObject> tracked_objects = get_tracked_objects(tracker);
@@ -58,6 +59,7 @@ TEST_F(TrackerTest, TestObjectListCallback) {
 
 }
 
+// Test function to predict next position of object using object velocity predicted by EKF
 TEST_F(TrackerTest, TestPredictTrackedObjects) {
   // Create a tracker instance
   ros::NodeHandle nh;
@@ -88,6 +90,7 @@ TEST_F(TrackerTest, TestPredictTrackedObjects) {
   ASSERT_DOUBLE_EQ(tracked_objects[0].centroid().position.z, 0.0);
 }
 
+// Test that a cost matrix is constructed correctly given a detected object and tracked object
 TEST_F(TrackerTest, costMatrixTest) {
   // Create a Tracker object
   ros::NodeHandle nh;
