@@ -2,6 +2,9 @@
 
 Tracker::Tracker(ros::NodeHandle& nh) : nh_(nh) {
     tracked_object_counter = 0;
+    if (!nh_) {
+        throw std::invalid_argument("Invalid NodeHandle provided");
+    }
     object_list_sub_ = nh_.subscribe<simple_object_tracker::ObjectList>("object_list_topic", 10, &Tracker::objectListCallback, this);
     tracked_object_list_pub_ = nh_.advertise<simple_object_tracker::ObjectList>("tracked_object_list_topic", 10);
     last_callback_time_ = ros::Time::now();
@@ -32,6 +35,10 @@ void Tracker::spin() {
 }
 
 void Tracker::objectListCallback(const simple_object_tracker::ObjectList::ConstPtr& object_list_msg) {
+    if (!object_list_msg) {
+        ROS_WARN("Received null object list");
+        return;
+    }
     ros::Time current_time = ros::Time::now();
     last_callback_time_ = current_time;
     
@@ -42,6 +49,10 @@ void Tracker::objectListCallback(const simple_object_tracker::ObjectList::ConstP
 }
 
 void Tracker::updateObjects(const simple_object_tracker::ObjectList::ConstPtr& curr_objects) {
+    if (!curr_objects) {
+        ROS_WARN("Received null object list");
+        return;
+    }
 
     // Convert current objects to vector of TrackedObject
     std::vector<TrackedObject> curr_tracked_objects;
