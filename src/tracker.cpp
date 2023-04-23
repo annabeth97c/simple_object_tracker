@@ -76,7 +76,7 @@ void Tracker::updateObjects(const simple_object_tracker::ObjectList::ConstPtr& c
 
     std::vector<int> assignments;
 
-    if (tracked_objects_.size() != 0 && curr_tracked_objects.size() != 0)
+    if (!tracked_objects_.empty() && !curr_tracked_objects.empty())
     {
         // Use Hungarian algorithm to assign current objects to previous objects
         assignments = hungarian(cost_matrix);
