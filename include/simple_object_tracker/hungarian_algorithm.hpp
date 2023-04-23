@@ -2,8 +2,6 @@
 #include <vector>
 #include <algorithm>
 
-using namespace std;
-
 const double INF = 1e9; // A large value to use as an initial value for some variables
 
 static void pad_cost_matrix(std::vector<std::vector<double>>& cost, double max_cost) {
@@ -28,20 +26,20 @@ static void pad_cost_matrix(std::vector<std::vector<double>>& cost, double max_c
 
 // Implementation of the Hungarian algorithm for finding a maximum-weighted perfect matching in a bipartite graph.
 
-static vector<int> hungarian(vector<vector<double>>& cost) {
+static std::vector<int> hungarian(std::vector<std::vector<double>>& cost) {
 
     pad_cost_matrix(cost, INF);
 
-    vector<vector<double>> initial_cost = cost;
+    std::vector<std::vector<double>> initial_cost = cost;
 
     int n = cost.size(), m = cost[0].size(); // n = number of vertices in the left part of the bipartite graph, m = number of vertices in the right part
-    vector<int> u(n + 1), v(m + 1), p(m + 1), way(m + 1); // Some auxiliary vectors
-    vector<int> match(n + 1, -1); // match[i] is the index of the vertex in the right part of the graph that is matched with vertex i in the left part
+    std::vector<int> u(n + 1), v(m + 1), p(m + 1), way(m + 1); // Some auxiliary vectors
+    std::vector<int> match(n + 1, -1); // match[i] is the index of the vertex in the right part of the graph that is matched with vertex i in the left part
     for (int i = 1; i <= n; i++) { // Loop over all vertices in the left part of the graph
         p[0] = i; // The first vertex in the path is i
         int j0 = 0; // The index of the previous vertex in the path is 0
-        vector<double> minv(m + 1, INF); // minv[j] is the minimum cost of an edge entering j
-        vector<bool> used(m + 1, false); //used[j] is true if vertex j is already in the path
+        std::vector<double> minv(m + 1, INF); // minv[j] is the minimum cost of an edge entering j
+        std::vector<bool> used(m + 1, false); //used[j] is true if vertex j is already in the path
         do {
             used[j0] = true; // Mark vertex j0 as visited
             int i0 = p[j0]; // i0 is the vertex that precedes j0 in the path
