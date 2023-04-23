@@ -1,5 +1,3 @@
-using namespace Eigen;
-
 class ExtendedKalmanFilter {
 public:
     ExtendedKalmanFilter() {}
@@ -31,16 +29,16 @@ public:
         return x_;
     }
 
-    VectorXd getMeasurementNoise() {
-        VectorXd v(2);
+    Eigen::VectorXd getMeasurementNoise() {
+        Eigen::VectorXd v(2);
         v.setRandom();
         v *= sqrt(R_(0, 0));
         return v;
     }
 
 private:
-    VectorXd x_;
-    MatrixXd P_;
-    MatrixXd Q_;
-    MatrixXd R_;
+    Eigen::VectorXd x_;
+    Eigen::MatrixXd P_;
+    Eigen::MatrixXd Q_;
+    Eigen::MatrixXd R_;
 };
