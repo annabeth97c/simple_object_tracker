@@ -56,16 +56,16 @@ void Tracker::updateObjects(const simple_object_tracker::ObjectList::ConstPtr& c
 
     // Convert current objects to vector of TrackedObject
     std::vector<TrackedObject> curr_tracked_objects;
-    for (const auto& obj : curr_objects->objects) {
+    for (const simple_object_tracker::Object& obj : curr_objects->objects) {
         curr_tracked_objects.emplace_back(TrackedObject(obj));
     }
 
     // Build cost matrix for Hungarian algorithm
     std::vector<std::vector<double>> cost_matrix;
 
-    for (const auto& prev_obj : tracked_objects_) {
+    for (const TrackedObject& prev_obj : tracked_objects_) {
         std::vector<double> costs;
-        for (const auto& curr_obj : curr_tracked_objects) {
+        for (const TrackedObject& curr_obj : curr_tracked_objects) {
             costs.push_back(cost_factory.association_cost(prev_obj, curr_obj));
         }
         cost_matrix.push_back(costs);
@@ -110,7 +110,7 @@ void Tracker::predictTrackedObjects() {
     ros::Time current_time = ros::Time::now();
 
     // Iterate through all tracked objects
-    for (auto& obj : tracked_objects_) {
+    for (TrackedObject& obj : tracked_objects_) {
         ros::Time last_state_change_time = obj.isPredicted() ? obj.last_predict_time_stamp() : obj.last_update_time_stamp();
         // Compute the time since the last update
         double dt = (current_time - obj.last_update_time_stamp()).toSec();
