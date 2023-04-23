@@ -173,88 +173,75 @@ TEST_F(TrackerTest, HungarianAssociationTest) {
 }
 
 // Test that the Hungarian Algorithm correctly associates new detections with existing tracks
-// TEST_F(TrackerTest, missingObjectTest) {
-//     ros::NodeHandle nh;
-//     Tracker tracker(nh);
+TEST_F(TrackerTest, missingObjectTest) {
+    ros::NodeHandle nh;
+    Tracker tracker(nh);
 
-//     std::cout << "hi! 1" << std::endl;
-//     // Create some initial tracked objects
-//     simple_object_tracker::ObjectList object_list_msg;
-//     simple_object_tracker::Object obj1;
-//     obj1.pose.pose.position.x = 1.0;
-//     obj1.pose.pose.position.y = 2.0;
-//     obj1.pose.pose.position.z = 0.5;
-//     obj1.dimension.vector.x = 3.0;
-//     obj1.dimension.vector.y = 4.0;
-//     obj1.dimension.vector.z = 0.9;
-//     object_list_msg.objects.push_back(obj1);
+    // std::cout << "hi! 1" << std::endl;
+    // Create some initial tracked objects
+    simple_object_tracker::ObjectList object_list_msg;
+    simple_object_tracker::Object obj1;
+    obj1.pose.position.x = 1.0;
+    obj1.pose.position.y = 2.0;
+    obj1.pose.position.z = 0.5;
 
-//     simple_object_tracker::Object obj2;
-//     obj2.pose.pose.position.x = 5.0;
-//     obj2.pose.pose.position.y = 6.0;
-//     obj2.pose.pose.position.z = 0.3;
-//     obj2.dimension.vector.x = 7.0;
-//     obj2.dimension.vector.y = 8.0;
-//     obj2.dimension.vector.z = 0.6;
-//     object_list_msg.objects.push_back(obj2);
+    object_list_msg.objects.push_back(obj1);
 
-//     updateObjects(tracker, object_list_msg);
+    simple_object_tracker::Object obj2;
+    obj2.pose.position.x = 5.0;
+    obj2.pose.position.y = 6.0;
+    obj2.pose.position.z = 0.3;
 
-//     std::cout << "hi! 2" << std::endl;
-//     // Create a new object list with the first object moved slightly
-//     simple_object_tracker::ObjectList object_list_msg2;
-//     simple_object_tracker::Object obj3;
-//     obj3.pose.pose.position.x = 1.1;
-//     obj3.pose.pose.position.y = 2.0;
-//     obj3.pose.pose.position.z = 0.5;
-//     obj3.dimension.vector.x = 3.0;
-//     obj3.dimension.vector.y = 4.0;
-//     obj3.dimension.vector.z = 0.9;
-//     object_list_msg2.objects.push_back(obj3);
+    object_list_msg.objects.push_back(obj2);
 
-//     simple_object_tracker::Object obj4;
-//     obj4.pose.pose.position.x = 5.0;
-//     obj4.pose.pose.position.y = 6.0;
-//     obj4.pose.pose.position.z = 0.3;
-//     obj4.dimension.vector.x = 7.0;
-//     obj4.dimension.vector.y = 8.0;
-//     obj4.dimension.vector.z = 0.6;
-//     object_list_msg2.objects.push_back(obj4);
+    updateObjects(tracker, object_list_msg);
 
-//     updateObjects(tracker, object_list_msg2);
+    std::cout << "[test 5] hi! 2" << std::endl;
+    // Create a new object list with the first object moved slightly
+    simple_object_tracker::ObjectList object_list_msg2;
+    simple_object_tracker::Object obj3;
+    obj3.pose.position.x = 1.1;
+    obj3.pose.position.y = 2.0;
+    obj3.pose.position.z = 0.5;
 
-//     std::cout << "hi! 3" << std::endl;
+    object_list_msg2.objects.push_back(obj3);
 
-//     // Create a new object list with the first object moved slightly
-//     simple_object_tracker::ObjectList object_list_msg3;
-//     simple_object_tracker::Object obj5;
-//     obj5.pose.pose.position.x = 1.2;
-//     obj5.pose.pose.position.y = 2.0;
-//     obj5.pose.pose.position.z = 0.5;
-//     obj5.dimension.vector.x = 3.0;
-//     obj5.dimension.vector.y = 4.0;
-//     obj5.dimension.vector.z = 0.9;
-//     object_list_msg3.objects.push_back(obj5);
+    simple_object_tracker::Object obj4;
+    obj4.pose.position.x = 5.0;
+    obj4.pose.position.y = 6.0;
+    obj4.pose.position.z = 0.3;
 
-//     updateObjects(tracker, object_list_msg3);
+    object_list_msg2.objects.push_back(obj4);
 
-//     std::cout << "hi! 4" << std::endl;
-//     // std::vector<TrackedObject> tracked_objects = get_tracked_objects(tracker);
+    updateObjects(tracker, object_list_msg2);
 
-//     // ASSERT_EQ(tracked_objects.size(), 2);
+    // Create a new object list with the first object moved slightly
+    simple_object_tracker::ObjectList object_list_msg3;
+    simple_object_tracker::Object obj5;
+    obj5.pose.position.x = 1.2;
+    obj5.pose.position.y = 2.0;
+    obj5.pose.position.z = 0.5;
 
-//     // // Verify that the first tracked object has been updated with the new position
-//     // ASSERT_EQ(tracked_objects[0].centroid().position.x, 1.2);
-//     // ASSERT_EQ(tracked_objects[0].centroid().position.y, 2.0);
+    object_list_msg3.objects.push_back(obj5);
 
-//     // std::cout << " obj 0 vel "<< tracked_objects[0].velocity() << std::endl;
-//     // // ASSERT_EQ(tracked_objects[0].velocity().vector.x, .0);
+    updateObjects(tracker, object_list_msg3);
 
-//     // // Verify that the second tracked object has not been updated
-//     // ASSERT_EQ(tracked_objects[1].centroid().position.x, 5.0);
-//     // ASSERT_EQ(tracked_objects[1].centroid().position.y, 6.0);
-//     // ASSERT_EQ(tracked_objects[1].isAssigned(), false);
-// }
+    std::vector<TrackedObject> tracked_objects = get_tracked_objects(tracker);
+
+    ASSERT_EQ(tracked_objects.size(), 2);
+
+    // // Verify that the first tracked object has been updated with the new position
+    ASSERT_EQ(tracked_objects[0].centroid().position.x, 1.2);
+    ASSERT_EQ(tracked_objects[0].centroid().position.y, 2.0);
+
+    // std::cout << " obj 0 vel "<< tracked_objects[0].velocity() << std::endl;
+    // ASSERT_EQ(tracked_objects[0].velocity().vector.x, .0);
+
+    // // Verify that the second tracked object has not been updated
+    ASSERT_EQ(tracked_objects[1].centroid().position.x, 5.0);
+    ASSERT_EQ(tracked_objects[1].centroid().position.y, 6.0);
+    ASSERT_EQ(tracked_objects[1].isAssigned(), false);
+}
 
 int main(int argc, char** argv) {
   ros::init(argc, argv, "tracker_test");
