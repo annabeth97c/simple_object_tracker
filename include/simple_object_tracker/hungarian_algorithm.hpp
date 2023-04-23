@@ -34,13 +34,16 @@ static vector<int> hungarian(vector<vector<double>>& cost) {
     for (int i = 1; i <= n; i++) { // Loop over all vertices in the left part of the graph
         p[0] = i; // The first vertex in the path is i
         int j0 = 0; // The index of the previous vertex in the path is 0
-        vector<int> minv(m + 1, INF), used(m + 1, false); // minv[j] is the minimum cost of an edge entering j, used[j] is true if vertex j is already in the path
+        vector<double> minv(m + 1, INF); // minv[j] is the minimum cost of an edge entering j
+        vector<bool> used(m + 1, false); //used[j] is true if vertex j is already in the path
         do {
             used[j0] = true; // Mark vertex j0 as visited
-            int i0 = p[j0], delta = INF, j1; // i0 is the vertex that precedes j0 in the path, delta is the minimum value of minv[j] for j not in the path, j1 is the vertex that minimizes minv[j]
+            int i0 = p[j0]; // i0 is the vertex that precedes j0 in the path
+            double delta = INF; // delta is the minimum value of minv[j] for j not in the path
+            int j1; // j1 is the vertex that minimizes minv[j]
             for (int j = 1; j <= m; j++) {
                 if (!used[j]) { // If vertex j is not in the path
-                    int cur = cost[i0-1][j-1] - u[i0] - v[j]; // The reduced cost of edge (i0,j) is cost[i0-1][j-1] - u[i0] - v[j]
+                    double cur = cost[i0-1][j-1] - u[i0] - v[j]; // The reduced cost of edge (i0,j) is cost[i0-1][j-1] - u[i0] - v[j]
                     if (cur < minv[j]) { // If the reduced cost is less than minv[j]
                         minv[j] = cur; // Update minv[j]
                         way[j] = j0; // Update the index of the previous vertex in the path for vertex j
