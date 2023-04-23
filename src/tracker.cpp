@@ -2,7 +2,7 @@
 
 Tracker::Tracker(ros::NodeHandle& nh) : nh_(nh) {
     tracked_object_counter = 0;
-    if (!nh_) {
+    if (nh.getNamespace().empty()) {
         throw std::invalid_argument("Invalid NodeHandle provided");
     }
     object_list_sub_ = nh_.subscribe<simple_object_tracker::ObjectList>("object_list_topic", 10, &Tracker::objectListCallback, this);
