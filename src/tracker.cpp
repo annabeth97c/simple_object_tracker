@@ -43,14 +43,11 @@ void Tracker::objectListCallback(const simple_object_tracker::ObjectList::ConstP
 
 void Tracker::updateObjects(const simple_object_tracker::ObjectList::ConstPtr& curr_objects) {
 
-    std::cout << "sup1" << std::endl;
     // Convert current objects to vector of TrackedObject
     std::vector<TrackedObject> curr_tracked_objects;
     for (const auto& obj : curr_objects->objects) {
         curr_tracked_objects.emplace_back(TrackedObject(obj));
     }
-
-    std::cout << "sup2" << std::endl;
 
     // Build cost matrix for Hungarian algorithm
     std::vector<std::vector<double>> cost_matrix;
@@ -62,8 +59,6 @@ void Tracker::updateObjects(const simple_object_tracker::ObjectList::ConstPtr& c
         }
         cost_matrix.push_back(costs);
     }
-
-    std::cout << "sup3" << std::endl;
 
     std::vector<int> assignments;
 
@@ -77,9 +72,6 @@ void Tracker::updateObjects(const simple_object_tracker::ObjectList::ConstPtr& c
         assignments.assign(tracked_objects_.size(), -1);
     }
 
-    std::cout << "sup4" << std::endl;
-
-
     // Assign current objects to previous objects
     for (size_t i = 0; i < tracked_objects_.size(); i++) {
         if (assignments[i+1] != -1) {
@@ -89,8 +81,6 @@ void Tracker::updateObjects(const simple_object_tracker::ObjectList::ConstPtr& c
             tracked_objects_[i].markMissed();
         }
     }
-
-    std::cout << "sup5" << std::endl;
 
     // Add unassigned current objects as new tracked objects
     for (size_t i = 0; i < curr_tracked_objects.size(); i++) {
@@ -102,7 +92,6 @@ void Tracker::updateObjects(const simple_object_tracker::ObjectList::ConstPtr& c
         }
     }
 
-    std::cout << "sup6" << std::endl;
 }
 
 void Tracker::predictTrackedObjects() {
