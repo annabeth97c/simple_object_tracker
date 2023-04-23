@@ -34,9 +34,9 @@ TEST_F(TrackerTest, TestObjectListCallback) {
   simple_object_tracker::ObjectList object_list;
   simple_object_tracker::Object object;
   // object.obj_id = 1;
-  object.pose.pose.position.x = 1.0;
-  object.pose.pose.position.y = 2.0;
-  object.pose.pose.position.z = 0.0;
+  object.pose.position.x = 1.0;
+  object.pose.position.y = 2.0;
+  object.pose.position.z = 0.0;
   object_list.objects.push_back(object);
 
   // // Create a tracker instance
@@ -64,10 +64,10 @@ TEST_F(TrackerTest, TestPredictTrackedObjects) {
   Tracker tracker(nh);
 
   simple_object_tracker::Object object;
-  object.obj_id = 1;
-  object.pose.pose.position.x = 0.0;
-  object.pose.pose.position.y = 0.0;
-  object.pose.pose.position.z = 0.0;
+  object.id = 1;
+  object.pose.position.x = 0.0;
+  object.pose.position.y = 0.0;
+  object.pose.position.z = 0.0;
 
   // Create a tracked object with ID 1 and position (0, 0, 0)
   TrackedObject tracked_object(object);
@@ -95,15 +95,15 @@ TEST_F(TrackerTest, costMatrixTest) {
 
   // Create two example TrackedObjects to use for testing
   simple_object_tracker::Object obj1;
-  obj1.pose.pose.position.x = 1.0;
-  obj1.pose.pose.position.y = 2.0;
-  obj1.pose.pose.position.z = 3.0;
+  obj1.pose.position.x = 1.0;
+  obj1.pose.position.y = 2.0;
+  obj1.pose.position.z = 3.0;
   TrackedObject prev_obj(obj1);
 
   simple_object_tracker::Object obj2;
-  obj2.pose.pose.position.x = 4.0;
-  obj2.pose.pose.position.y = 5.0;
-  obj2.pose.pose.position.z = 6.0;
+  obj2.pose.position.x = 4.0;
+  obj2.pose.position.y = 5.0;
+  obj2.pose.position.z = 6.0;
   TrackedObject curr_obj(obj2);
 
   // Set the expected cost value based on the distance between the objects
@@ -126,21 +126,17 @@ TEST_F(TrackerTest, HungarianAssociationTest) {
     // Create some initial tracked objects
     simple_object_tracker::ObjectList object_list_msg;
     simple_object_tracker::Object obj1;
-    obj1.pose.pose.position.x = 1.0;
-    obj1.pose.pose.position.y = 2.0;
-    obj1.pose.pose.position.z = 0.5;
-    obj1.dimension.vector.x = 3.0;
-    obj1.dimension.vector.y = 4.0;
-    obj1.dimension.vector.z = 0.9;
+    obj1.pose.position.x = 1.0;
+    obj1.pose.position.y = 2.0;
+    obj1.pose.position.z = 0.5;
+
     object_list_msg.objects.push_back(obj1);
 
     simple_object_tracker::Object obj2;
-    obj2.pose.pose.position.x = 5.0;
-    obj2.pose.pose.position.y = 6.0;
-    obj2.pose.pose.position.z = 0.3;
-    obj2.dimension.vector.x = 7.0;
-    obj2.dimension.vector.y = 8.0;
-    obj2.dimension.vector.z = 0.6;
+    obj2.pose.position.x = 5.0;
+    obj2.pose.position.y = 6.0;
+    obj2.pose.position.z = 0.3;
+
     object_list_msg.objects.push_back(obj2);
 
     // tracker.updateObjects(object_list_msg);
@@ -149,21 +145,17 @@ TEST_F(TrackerTest, HungarianAssociationTest) {
     // Create a new object list with the first object moved slightly
     simple_object_tracker::ObjectList object_list_msg2;
     simple_object_tracker::Object obj3;
-    obj3.pose.pose.position.x = 1.1;
-    obj3.pose.pose.position.y = 2.0;
-    obj3.pose.pose.position.z = 0.5;
-    obj3.dimension.vector.x = 3.0;
-    obj3.dimension.vector.y = 4.0;
-    obj3.dimension.vector.z = 0.9;
+    obj3.pose.position.x = 1.1;
+    obj3.pose.position.y = 2.0;
+    obj3.pose.position.z = 0.5;
+
     object_list_msg2.objects.push_back(obj3);
 
     simple_object_tracker::Object obj4;
-    obj4.pose.pose.position.x = 5.0;
-    obj4.pose.pose.position.y = 6.0;
-    obj4.pose.pose.position.z = 0.3;
-    obj4.dimension.vector.x = 7.0;
-    obj4.dimension.vector.y = 8.0;
-    obj4.dimension.vector.z = 0.6;
+    obj4.pose.position.x = 5.0;
+    obj4.pose.position.y = 6.0;
+    obj4.pose.position.z = 0.3;
+
     object_list_msg2.objects.push_back(obj4);
 
     // tracker.updateObjects(object_list_msg2);
