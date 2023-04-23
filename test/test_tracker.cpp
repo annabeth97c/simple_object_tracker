@@ -163,8 +163,6 @@ TEST_F(TrackerTest, HungarianAssociationTest) {
 
     std::vector<TrackedObject> tracked_objects = get_tracked_objects(tracker);
 
-    std::cout << "tracked objects size : " << tracked_objects.size() << std::endl;
-
     // Verify that the first tracked object has been updated with the new position
     ASSERT_EQ(tracked_objects[0].centroid().position.x, 1.1);
     ASSERT_EQ(tracked_objects[0].centroid().position.y, 2.0);
