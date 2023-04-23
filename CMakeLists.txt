@@ -1,5 +1,8 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.6.0)
 project(simple_object_tracker)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
@@ -43,6 +46,7 @@ add_executable(simple_object_tracker
   src/tracker_main.cpp
   src/tracker.cpp
 )
+add_dependencies(simple_object_tracker simple_object_tracker_generate_messages_cpp)
 target_link_libraries(simple_object_tracker
   ${catkin_LIBRARIES}
   ${EIGEN_LIBRARIES}
@@ -54,11 +58,11 @@ install(TARGETS simple_object_tracker
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-install(DIRECTORY launch
- DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+# install(DIRECTORY launch
+#  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 
-install(DIRECTORY configs
-DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+# install(DIRECTORY configs
+# DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 
 if(CATKIN_ENABLE_TESTING)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
