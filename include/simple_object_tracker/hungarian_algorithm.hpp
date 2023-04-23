@@ -4,7 +4,27 @@
 
 using namespace std;
 
-const int INF = 1e9; // A large value to use as an initial value for some variables
+const double INF = 1e9; // A large value to use as an initial value for some variables
+
+static void pad_cost_matrix(std::vector<std::vector<double>>& cost, double max_cost) {
+    // Determine the current dimensions of the matrix
+    int num_rows = cost.size();
+    int num_cols = cost[0].size();
+
+    // Determine the maximum dimension of the matrix (the new size of the square matrix)
+    int max_dim = std::max(num_rows, num_cols);
+
+    // Pad rows and columns as needed
+    for (int i = 0; i < max_dim - num_rows; i++) {
+        std::vector<double> row(num_cols, max_cost);
+        cost.push_back(row);
+    }
+    for (int i = 0; i < max_dim - num_cols; i++) {
+        for (int j = 0; j < max_dim; j++) {
+            cost[j].push_back(max_cost);
+        }
+    }
+}
 
 // Implementation of the Hungarian algorithm for finding a maximum-weighted perfect matching in a bipartite graph.
 static vector<int> hungarian(vector<vector<double>>& cost) {
