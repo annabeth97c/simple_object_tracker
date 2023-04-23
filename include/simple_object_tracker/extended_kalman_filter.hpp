@@ -1,31 +1,31 @@
 class ExtendedKalmanFilter {
 public:
     ExtendedKalmanFilter() {}
-    ExtendedKalmanFilter(VectorXd x0, MatrixXd P0, MatrixXd Q, MatrixXd R) {
+    ExtendedKalmanFilter(const Eigen::VectorXd& x0, const Eigen::MatrixXd& P0, const Eigen::MatrixXd& Q, const Eigen::MatrixXd& R) {
         init(x0, P0, Q, R);
     }
 
-    void init(VectorXd x0, MatrixXd P0, MatrixXd Q, MatrixXd R) {
+    void init(const Eigen::VectorXd& x0, const Eigen::MatrixXd& P0, const Eigen::MatrixXd& Q, const Eigen::MatrixXd& R) {
         x_ = x0;
         P_ = P0;
         Q_ = Q;
         R_ = R;
     }
 
-    void predict(MatrixXd F, VectorXd u) {
+    void predict(const Eigen::MatrixXd& F, const Eigen::VectorXd& u) {
         x_ = F * x_;
         P_ = F * P_ * F.transpose() + Q_;
     }
 
-    void update(VectorXd z, MatrixXd H) {
-        VectorXd y = z - H * x_;
-        MatrixXd S = H * P_ * H.transpose() + R_;
-        MatrixXd K = P_ * H.transpose() * S.inverse();
+    void update(const Eigen::VectorXd& z, const Eigen::MatrixXd& H) {
+        Eigen::VectorXd y = z - H * x_;
+        Eigen::MatrixXd S = H * P_ * H.transpose() + R_;
+        Eigen::MatrixXd K = P_ * H.transpose() * S.inverse();
         x_ = x_ + K * y;
-        P_ = (MatrixXd::Identity(x_.size(), x_.size()) - K * H) * P_;
+        P_ = (Eigen::MatrixXd::Identity(x_.size(), x_.size()) - K * H) * P_;
     }
 
-    VectorXd getState() {
+    Eigen::VectorXd getState() {
         return x_;
     }
 
