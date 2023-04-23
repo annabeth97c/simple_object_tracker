@@ -27,7 +27,13 @@ static void pad_cost_matrix(std::vector<std::vector<double>>& cost, double max_c
 }
 
 // Implementation of the Hungarian algorithm for finding a maximum-weighted perfect matching in a bipartite graph.
+
 static vector<int> hungarian(vector<vector<double>>& cost) {
+
+    pad_cost_matrix(cost, INF);
+
+    vector<vector<double>> initial_cost = cost;
+
     int n = cost.size(), m = cost[0].size(); // n = number of vertices in the left part of the bipartite graph, m = number of vertices in the right part
     vector<int> u(n + 1), v(m + 1), p(m + 1), way(m + 1); // Some auxiliary vectors
     vector<int> match(n + 1, -1); // match[i] is the index of the vertex in the right part of the graph that is matched with vertex i in the left part
@@ -74,6 +80,7 @@ static vector<int> hungarian(vector<vector<double>>& cost) {
     for (int j = 1; j <= m; j++) { // Get the matching
         if (p[j] > 0) {
             match[p[j]] = j;
+            if (initial_cost[p[j] - 1][j - 1] == INF) match[p[j]] = -1;
         }
     }
     return match;
