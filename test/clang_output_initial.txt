@@ -1,0 +1,241 @@
+1. warning: argument unused during compilation: '--coverage' [clang-diagnostic-unused-command-line-argument]
+2. /proj/catkin_ws/src/simple_object_tracker/src/tracker_main.cpp:5:5: warning: calling a function that uses a default argument is disallowed [fuchsia-default-arguments]
+    ros::init(argc, argv, "pointcloud_cluster_node");
+    ^
+/opt/ros/melodic/include/ros/init.h:83:72: note: default parameter was declared here
+ROSCPP_DECL void init(int &argc, char **argv, const std::string& name, uint32_t options = 0);
+                                                                       ^
+3. /proj/catkin_ws/src/simple_object_tracker/src/tracker_main.cpp:5:27: warning: calling a function that uses a default argument is disallowed [fuchsia-default-arguments]
+    ros::init(argc, argv, "pointcloud_cluster_node");
+                          ^
+/usr/lib/gcc/x86_64-linux-gnu/7.5.0/../../../../include/c++/7.5.0/bits/basic_string.h:509:39: note: default parameter was declared here
+      basic_string(const _CharT* __s, const _Alloc& __a = _Alloc())
+                                      ^
+4. /proj/catkin_ws/src/simple_object_tracker/src/tracker_main.cpp:6:21: warning: calling a function that uses a default argument is disallowed [fuchsia-default-arguments]
+    ros::NodeHandle nh;
+                    ^
+/opt/ros/melodic/include/ros/node_handle.h:104:16: note: default parameter was declared here
+    NodeHandle(const std::string& ns = std::string(), const M_string& remappings = M_string());
+               ^
+5. warning: argument unused during compilation: '--coverage' [clang-diagnostic-unused-command-line-argument]
+6. /proj/catkin_ws/src/simple_object_tracker/include/simple_object_tracker/hungarian_algorithm.hpp:70:16: warning: Assigned value is garbage or undefined [clang-analyzer-core.uninitialized.Assign]
+            j0 = j1; // Move to the next vertex in the path
+               ^
+/proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:38:5: note: Taking false branch
+    if (!object_list_msg) {
+    ^
+/proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:48:5: note: Calling 'Tracker::updateObjects'
+    updateObjects(object_list_msg);
+    ^
+/proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:52:5: note: Taking false branch
+    if (!curr_objects) {
+    ^
+/proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:76:9: note: Assuming the condition is true
+    if (tracked_objects_.size() != 0 && curr_tracked_objects.size() != 0)
+        ^
+/proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:76:9: note: Left side of '&&' is true
+/proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:76:41: note: Assuming the condition is true
+    if (tracked_objects_.size() != 0 && curr_tracked_objects.size() != 0)
+                                        ^
+/proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:76:5: note: Taking true branch
+    if (tracked_objects_.size() != 0 && curr_tracked_objects.size() != 0)
+    ^
+/proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:79:23: note: Calling 'hungarian'
+        assignments = hungarian(cost_matrix);
+                      ^
+/proj/catkin_ws/src/simple_object_tracker/include/simple_object_tracker/hungarian_algorithm.hpp:38:21: note: Assuming 'i' is <= 'n'
+    for (int i = 1; i <= n; i++) { // Loop over all vertices in the left part of the graph
+                    ^
+/proj/catkin_ws/src/simple_object_tracker/include/simple_object_tracker/hungarian_algorithm.hpp:38:5: note: Loop condition is true.  Entering loop body
+    for (int i = 1; i <= n; i++) { // Loop over all vertices in the left part of the graph
+    ^
+/proj/catkin_ws/src/simple_object_tracker/include/simple_object_tracker/hungarian_algorithm.hpp:47:13: note: 'j1' declared without an initial value
+            int j1; // j1 is the vertex that minimizes minv[j]
+            ^
+/proj/catkin_ws/src/simple_object_tracker/include/simple_object_tracker/hungarian_algorithm.hpp:48:29: note: Assuming 'j' is > 'm'
+            for (int j = 1; j <= m; j++) {
+                            ^
+/proj/catkin_ws/src/simple_object_tracker/include/simple_object_tracker/hungarian_algorithm.hpp:48:13: note: Loop condition is false. Execution continues on line 61
+            for (int j = 1; j <= m; j++) {
+            ^
+/proj/catkin_ws/src/simple_object_tracker/include/simple_object_tracker/hungarian_algorithm.hpp:61:13: note: Loop condition is true.  Entering loop body
+            for (int j = 0; j <= m; j++) { // Update u and v
+            ^
+/proj/catkin_ws/src/simple_object_tracker/include/simple_object_tracker/hungarian_algorithm.hpp:62:17: note: Taking false branch
+                if (used[j]) {
+                ^
+/proj/catkin_ws/src/simple_object_tracker/include/simple_object_tracker/hungarian_algorithm.hpp:61:13: note: Loop condition is false. Execution continues on line 70
+            for (int j = 0; j <= m; j++) { // Update u and v
+            ^
+/proj/catkin_ws/src/simple_object_tracker/include/simple_object_tracker/hungarian_algorithm.hpp:70:16: note: Assigned value is garbage or undefined
+            j0 = j1; // Move to the next vertex in the path
+               ^
+7. /proj/catkin_ws/src/simple_object_tracker/include/simple_object_tracker/tracker.h:30:10: warning: function 'Tracker::updateObjects' has a definition with different parameter names [readability-inconsistent-declaration-parameter-name]
+    void updateObjects(const simple_object_tracker::ObjectList::ConstPtr& object_list_msg);
+         ^                                                                ~~~~~~~~~~~~~~~~
+                                                                          curr_objects
+/proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:51:15: note: the definition seen here
+void Tracker::updateObjects(const simple_object_tracker::ObjectList::ConstPtr& curr_objects) {
+              ^
+/proj/catkin_ws/src/simple_object_tracker/include/simple_object_tracker/tracker.h:30:10: note: differing parameters are named here: ('object_list_msg'), in definition: ('curr_objects')
+    void updateObjects(const simple_object_tracker::ObjectList::ConstPtr& object_list_msg);
+         ^
+8. /proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:8:24: warning: calling a function that uses a default argument is disallowed [fuchsia-default-arguments]
+    object_list_sub_ = nh_.subscribe<simple_object_tracker::ObjectList>("object_list_topic", 10, &Tracker::objectListCallback, this);
+                       ^
+/opt/ros/melodic/include/ros/node_handle.h:467:24: note: default parameter was declared here
+                       const TransportHints& transport_hints = TransportHints())
+                       ^
+9. /proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:8:73: warning: calling a function that uses a default argument is disallowed [fuchsia-default-arguments]
+    object_list_sub_ = nh_.subscribe<simple_object_tracker::ObjectList>("object_list_topic", 10, &Tracker::objectListCallback, this);
+                                                                        ^
+/usr/lib/gcc/x86_64-linux-gnu/7.5.0/../../../../include/c++/7.5.0/bits/basic_string.h:509:39: note: default parameter was declared here
+      basic_string(const _CharT* __s, const _Alloc& __a = _Alloc())
+                                      ^
+10. /proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:9:32: warning: calling a function that uses a default argument is disallowed [fuchsia-default-arguments]
+    tracked_object_list_pub_ = nh_.advertise<simple_object_tracker::ObjectList>("tracked_object_list_topic", 10);
+                               ^
+/opt/ros/melodic/include/ros/node_handle.h:249:72: note: default parameter was declared here
+    Publisher advertise(const std::string& topic, uint32_t queue_size, bool latch = false)
+                                                                       ^
+11. /proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:9:81: warning: calling a function that uses a default argument is disallowed [fuchsia-default-arguments]
+    tracked_object_list_pub_ = nh_.advertise<simple_object_tracker::ObjectList>("tracked_object_list_topic", 10);
+                                                                                ^
+/usr/lib/gcc/x86_64-linux-gnu/7.5.0/../../../../include/c++/7.5.0/bits/basic_string.h:509:39: note: default parameter was declared here
+      basic_string(const _CharT* __s, const _Alloc& __a = _Alloc())
+                                      ^
+12. /proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:39:9: warning: calling a function that uses a default argument is disallowed [fuchsia-default-arguments]
+        ROS_WARN("Received null object list");
+        ^
+/opt/ros/melodic/include/rosconsole/macros_generated.h:162:61: note: expanded from macro 'ROS_WARN'
+#define ROS_WARN(...) ROS_LOG(::ros::console::levels::Warn, ROSCONSOLE_DEFAULT_NAME, __VA_ARGS__)
+                                                            ^
+/opt/ros/melodic/include/ros/console.h:301:33: note: expanded from macro 'ROSCONSOLE_DEFAULT_NAME'
+#define ROSCONSOLE_DEFAULT_NAME ROSCONSOLE_NAME_PREFIX
+                                ^
+/opt/ros/melodic/include/ros/console.h:300:32: note: expanded from macro 'ROSCONSOLE_NAME_PREFIX'
+#define ROSCONSOLE_NAME_PREFIX ROSCONSOLE_ROOT_LOGGER_NAME "." ROSCONSOLE_PACKAGE_NAME
+                               ^
+/opt/ros/melodic/include/ros/console.h:299:37: note: expanded from macro 'ROSCONSOLE_ROOT_LOGGER_NAME'
+#define ROSCONSOLE_ROOT_LOGGER_NAME "ros"
+                                    ^
+/usr/lib/gcc/x86_64-linux-gnu/7.5.0/../../../../include/c++/7.5.0/bits/basic_string.h:509:39: note: default parameter was declared here
+      basic_string(const _CharT* __s, const _Alloc& __a = _Alloc())
+                                      ^
+13. /proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:39:9: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg]
+        ROS_WARN("Received null object list");
+        ^
+/opt/ros/melodic/include/rosconsole/macros_generated.h:162:23: note: expanded from macro 'ROS_WARN'
+#define ROS_WARN(...) ROS_LOG(::ros::console::levels::Warn, ROSCONSOLE_DEFAULT_NAME, __VA_ARGS__)
+                      ^
+/opt/ros/melodic/include/ros/console.h:572:35: note: expanded from macro 'ROS_LOG'
+#define ROS_LOG(level, name, ...) ROS_LOG_COND(true, level, name, __VA_ARGS__)
+                                  ^
+/opt/ros/melodic/include/ros/console.h:387:7: note: expanded from macro 'ROS_LOG_COND'
+      ROSCONSOLE_PRINT_AT_LOCATION(__VA_ARGS__); \
+      ^
+/opt/ros/melodic/include/ros/console.h:351:5: note: expanded from macro 'ROSCONSOLE_PRINT_AT_LOCATION'
+    ROSCONSOLE_PRINT_AT_LOCATION_WITH_FILTER(NULL, __VA_ARGS__)
+    ^
+/opt/ros/melodic/include/ros/console.h:348:5: note: expanded from macro 'ROSCONSOLE_PRINT_AT_LOCATION_WITH_FILTER'
+    ::ros::console::print(filter, __rosconsole_define_location__loc.logger_, __rosconsole_define_location__loc.level_, __FILE__, __LINE__, __ROSCONSOLE_FUNCTION__, __VA_ARGS__)
+    ^
+14. /proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:39:9: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay]
+        ROS_WARN("Received null object list");
+        ^
+/opt/ros/melodic/include/rosconsole/macros_generated.h:162:23: note: expanded from macro 'ROS_WARN'
+#define ROS_WARN(...) ROS_LOG(::ros::console::levels::Warn, ROSCONSOLE_DEFAULT_NAME, __VA_ARGS__)
+                      ^
+/opt/ros/melodic/include/ros/console.h:572:35: note: expanded from macro 'ROS_LOG'
+#define ROS_LOG(level, name, ...) ROS_LOG_COND(true, level, name, __VA_ARGS__)
+                                  ^
+/opt/ros/melodic/include/ros/console.h:387:7: note: expanded from macro 'ROS_LOG_COND'
+      ROSCONSOLE_PRINT_AT_LOCATION(__VA_ARGS__); \
+      ^
+/opt/ros/melodic/include/ros/console.h:351:5: note: expanded from macro 'ROSCONSOLE_PRINT_AT_LOCATION'
+    ROSCONSOLE_PRINT_AT_LOCATION_WITH_FILTER(NULL, __VA_ARGS__)
+    ^
+/opt/ros/melodic/include/ros/console.h:348:140: note: expanded from macro 'ROSCONSOLE_PRINT_AT_LOCATION_WITH_FILTER'
+    ::ros::console::print(filter, __rosconsole_define_location__loc.logger_, __rosconsole_define_location__loc.level_, __FILE__, __LINE__, __ROSCONSOLE_FUNCTION__, __VA_ARGS__)
+                                                                                                                                           ^
+/opt/ros/melodic/include/ros/console.h:287:35: note: expanded from macro '__ROSCONSOLE_FUNCTION__'
+  #define __ROSCONSOLE_FUNCTION__ __PRETTY_FUNCTION__
+                                  ^
+15. /proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:53:9: warning: calling a function that uses a default argument is disallowed [fuchsia-default-arguments]
+        ROS_WARN("Received null object list");
+        ^
+/opt/ros/melodic/include/rosconsole/macros_generated.h:162:61: note: expanded from macro 'ROS_WARN'
+#define ROS_WARN(...) ROS_LOG(::ros::console::levels::Warn, ROSCONSOLE_DEFAULT_NAME, __VA_ARGS__)
+                                                            ^
+/opt/ros/melodic/include/ros/console.h:301:33: note: expanded from macro 'ROSCONSOLE_DEFAULT_NAME'
+#define ROSCONSOLE_DEFAULT_NAME ROSCONSOLE_NAME_PREFIX
+                                ^
+/opt/ros/melodic/include/ros/console.h:300:32: note: expanded from macro 'ROSCONSOLE_NAME_PREFIX'
+#define ROSCONSOLE_NAME_PREFIX ROSCONSOLE_ROOT_LOGGER_NAME "." ROSCONSOLE_PACKAGE_NAME
+                               ^
+/opt/ros/melodic/include/ros/console.h:299:37: note: expanded from macro 'ROSCONSOLE_ROOT_LOGGER_NAME'
+#define ROSCONSOLE_ROOT_LOGGER_NAME "ros"
+                                    ^
+/usr/lib/gcc/x86_64-linux-gnu/7.5.0/../../../../include/c++/7.5.0/bits/basic_string.h:509:39: note: default parameter was declared here
+      basic_string(const _CharT* __s, const _Alloc& __a = _Alloc())
+                                      ^
+16. /proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:53:9: warning: do not call c-style vararg functions [cppcoreguidelines-pro-type-vararg]
+        ROS_WARN("Received null object list");
+        ^
+/opt/ros/melodic/include/rosconsole/macros_generated.h:162:23: note: expanded from macro 'ROS_WARN'
+#define ROS_WARN(...) ROS_LOG(::ros::console::levels::Warn, ROSCONSOLE_DEFAULT_NAME, __VA_ARGS__)
+                      ^
+/opt/ros/melodic/include/ros/console.h:572:35: note: expanded from macro 'ROS_LOG'
+#define ROS_LOG(level, name, ...) ROS_LOG_COND(true, level, name, __VA_ARGS__)
+                                  ^
+/opt/ros/melodic/include/ros/console.h:387:7: note: expanded from macro 'ROS_LOG_COND'
+      ROSCONSOLE_PRINT_AT_LOCATION(__VA_ARGS__); \
+      ^
+/opt/ros/melodic/include/ros/console.h:351:5: note: expanded from macro 'ROSCONSOLE_PRINT_AT_LOCATION'
+    ROSCONSOLE_PRINT_AT_LOCATION_WITH_FILTER(NULL, __VA_ARGS__)
+    ^
+/opt/ros/melodic/include/ros/console.h:348:5: note: expanded from macro 'ROSCONSOLE_PRINT_AT_LOCATION_WITH_FILTER'
+    ::ros::console::print(filter, __rosconsole_define_location__loc.logger_, __rosconsole_define_location__loc.level_, __FILE__, __LINE__, __ROSCONSOLE_FUNCTION__, __VA_ARGS__)
+    ^
+17. /proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:53:9: warning: do not implicitly decay an array into a pointer; consider using gsl::array_view or an explicit cast instead [cppcoreguidelines-pro-bounds-array-to-pointer-decay]
+        ROS_WARN("Received null object list");
+        ^
+/opt/ros/melodic/include/rosconsole/macros_generated.h:162:23: note: expanded from macro 'ROS_WARN'
+#define ROS_WARN(...) ROS_LOG(::ros::console::levels::Warn, ROSCONSOLE_DEFAULT_NAME, __VA_ARGS__)
+                      ^
+/opt/ros/melodic/include/ros/console.h:572:35: note: expanded from macro 'ROS_LOG'
+#define ROS_LOG(level, name, ...) ROS_LOG_COND(true, level, name, __VA_ARGS__)
+                                  ^
+/opt/ros/melodic/include/ros/console.h:387:7: note: expanded from macro 'ROS_LOG_COND'
+      ROSCONSOLE_PRINT_AT_LOCATION(__VA_ARGS__); \
+      ^
+/opt/ros/melodic/include/ros/console.h:351:5: note: expanded from macro 'ROSCONSOLE_PRINT_AT_LOCATION'
+    ROSCONSOLE_PRINT_AT_LOCATION_WITH_FILTER(NULL, __VA_ARGS__)
+    ^
+/opt/ros/melodic/include/ros/console.h:348:140: note: expanded from macro 'ROSCONSOLE_PRINT_AT_LOCATION_WITH_FILTER'
+    ::ros::console::print(filter, __rosconsole_define_location__loc.logger_, __rosconsole_define_location__loc.level_, __FILE__, __LINE__, __ROSCONSOLE_FUNCTION__, __VA_ARGS__)
+                                                                                                                                           ^
+/opt/ros/melodic/include/ros/console.h:287:35: note: expanded from macro '__ROSCONSOLE_FUNCTION__'
+  #define __ROSCONSOLE_FUNCTION__ __PRETTY_FUNCTION__
+                                  ^
+18. /proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:69:13: warning: 'push_back' is called inside a loop; consider pre-allocating the vector capacity before the loop [performance-inefficient-vector-operation]
+            costs.push_back(cost_factory.association_cost(prev_obj, curr_obj));
+            ^
+19. /proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:76:9: warning: the 'empty' method should be used to check for emptiness instead of 'size' [readability-container-size-empty]
+    if (tracked_objects_.size() != 0 && curr_tracked_objects.size() != 0)
+        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        !tracked_objects_.empty()
+/usr/lib/gcc/x86_64-linux-gnu/7.5.0/../../../../include/c++/7.5.0/bits/stl_vector.h:759:7: note: method 'vector<TrackedObject, std::allocator<TrackedObject> >'::empty() defined here
+      empty() const _GLIBCXX_NOEXCEPT
+      ^
+20. /proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:76:41: warning: the 'empty' method should be used to check for emptiness instead of 'size' [readability-container-size-empty]
+    if (tracked_objects_.size() != 0 && curr_tracked_objects.size() != 0)
+                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                        !curr_tracked_objects.empty()
+/usr/lib/gcc/x86_64-linux-gnu/7.5.0/../../../../include/c++/7.5.0/bits/stl_vector.h:759:7: note: method 'vector<TrackedObject, std::allocator<TrackedObject> >'::empty() defined here
+      empty() const _GLIBCXX_NOEXCEPT
+      ^
+21. /proj/catkin_ws/src/simple_object_tracker/src/tracker.cpp:97:5: warning: use range-based for loop instead [modernize-loop-convert]
+    for (size_t i = 0; i < curr_tracked_objects.size(); i++) {
+    ^   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        (auto & curr_tracked_object : curr_tracked_objects)
