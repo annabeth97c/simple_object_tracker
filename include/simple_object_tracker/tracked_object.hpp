@@ -131,7 +131,7 @@ public:
     bool isAssigned() const { return is_assigned_; }
     bool isPredicted() const { return is_predicted_; }
 
-    void set_frame_id(std::string frame) { frame_id_ = frame; }
+    void set_frame_id(const std::string& frame) { frame_id_ = frame; }
     void set_id(int id) { id_ = id; }
     void set_is_assigned(bool _is_assigned) { is_assigned_ = _is_assigned; }
 
