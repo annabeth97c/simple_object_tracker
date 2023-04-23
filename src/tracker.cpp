@@ -62,9 +62,12 @@ void Tracker::updateObjects(const simple_object_tracker::ObjectList::ConstPtr& c
 
     // Build cost matrix for Hungarian algorithm
     std::vector<std::vector<double>> cost_matrix;
+    cost_matrix.reserve(tracked_objects_.size());
 
     for (const TrackedObject& prev_obj : tracked_objects_) {
         std::vector<double> costs;
+        costs.reserve(curr_tracked_objects.size());
+
         for (const TrackedObject& curr_obj : curr_tracked_objects) {
             costs.push_back(cost_factory.association_cost(prev_obj, curr_obj));
         }
