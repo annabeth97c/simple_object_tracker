@@ -97,11 +97,11 @@ void Tracker::updateObjects(const simple_object_tracker::ObjectList::ConstPtr& c
     }
 
     // Add unassigned current objects as new tracked objects
-    for (size_t i = 0; i < curr_tracked_objects.size(); i++) {
-        if (!curr_tracked_objects[i].isAssigned()) {
-            curr_tracked_objects[i].set_id(tracked_object_counter);
-            curr_tracked_objects[i].set_is_assigned(true);
-            tracked_objects_.push_back(curr_tracked_objects[i]);
+    for (TrackedObject& curr_tracked_object_ : curr_tracked_objects) {
+        if (!curr_tracked_object_.isAssigned()) {
+            curr_tracked_object_.set_id(tracked_object_counter);
+            curr_tracked_object_.set_is_assigned(true);
+            tracked_objects_.push_back(curr_tracked_object_);
             tracked_object_counter++;
         }
     }
