@@ -17,7 +17,7 @@ public:
         return total_cost;
     }
 
-    double euclidean_distance(geometry_msgs::Pose a, geometry_msgs::Pose b) {
+    double euclidean_distance(const geometry_msgs::Pose& a, const geometry_msgs::Pose& b) {
         Eigen::Vector3d pos_a(a.position.x, a.position.y, a.position.z);
         Eigen::Vector3d pos_b(b.position.x, b.position.y, b.position.z);
 
